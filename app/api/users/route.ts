@@ -1,14 +1,11 @@
-import { MongoClient } from "mongodb";
-
-const uri = process.env.MONGODB_URI;
+import clientPromise from "../../../lib/mongodb"; // Adjust path as needed
 
 export async function POST(req: Request) {
-      console.log("working.")
+  console.log("Adding user...");
 
   const { name, email, age } = await req.json();
 
-  const client = new MongoClient(uri!);
-  await client.connect();
+  const client = await clientPromise;
 
   await client
     .db("Module5")
@@ -20,7 +17,18 @@ export async function POST(req: Request) {
       date: new Date(),
     });
 
-  await client.close();
+  // Don't close the connection - clientPromise manages it
 
-  return Response.json({ ok: true });
+  return Response.json(
+    { ok: true },
+    {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      }
+    }
+  );
 }
+
+// Add these exports to disable caching
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
