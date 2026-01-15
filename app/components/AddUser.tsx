@@ -25,6 +25,7 @@ export default function AddUser() {
 
     // THIS IS THE KEY LINE - Forces Next.js to refetch the page data
     router.refresh();
+    router.push('/database'); 
   };
 
   return (
