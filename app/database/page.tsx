@@ -1,3 +1,5 @@
+export const revalidate = 0; // This disables caching for this page
+
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 const uri = process.env.MONGODB_URI;

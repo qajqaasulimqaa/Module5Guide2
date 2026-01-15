@@ -3,7 +3,7 @@ import { MongoClient } from "mongodb";
 const uri = process.env.MONGODB_URI;
 
 export async function POST(req: Request) {
-      console.log("✅ POST /api/users hit")
+      console.log("working.")
 
   const { name, email, age } = await req.json();
 
