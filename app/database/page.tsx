@@ -1,7 +1,6 @@
 export const revalidate = 0;
-export const dynamic = 'force-dynamic'; 
 
-import clientPromise from "../lib/mongodb";
+import clientPromise from "../lib/mongodb.ts"; // Adjust path as needed
 
 async function getUsers() {
   const client = await clientPromise;
