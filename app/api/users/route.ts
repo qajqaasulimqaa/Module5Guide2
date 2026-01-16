@@ -1,4 +1,4 @@
-import clientPromise from "../../../lib/mongodb"; // Adjust path as needed
+import clientPromise from "lib/mongodb"; // Adjust path as needed
 
 export async function POST(req: Request) {
   console.log("Adding user...");

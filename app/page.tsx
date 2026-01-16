@@ -12,7 +12,7 @@ export default function Front(){
   <h1>Welcome, to Guide 2 in Module 5!</h1>
   <h2>Enter data and press the button below</h2>
   <AddUser />
-    <Button />
+  <Button />
     </>
   )
 }; 
