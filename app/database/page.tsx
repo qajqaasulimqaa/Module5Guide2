@@ -1,23 +1,28 @@
-export const revalidate = 0;
-export const dynamic = 'force-dynamic';
+"use client"
 
+import { useEffect, useState } from "react"; 
+import { getUsers } from "../lib/getusers"; 
 
-import clientPromise from "../lib/mongodb.ts"; // Adjust path as needed
-
-async function getUsers() {
-  const client = await clientPromise;
-  const users = await client
-    .db("Module5")
-    .collection("users")
-    .find({})
-    .toArray();
+export default function Database() {
+  const [users, setUsers] = useState<any[]>([]);  // ✅ Added type
+  const [loading, setLoading] = useState(true);   // ✅ Added loading state
   
-  return users;
-}
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const data = await getUsers();
+        setUsers(data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getData(); 
+  }, []);  // ✅ Added dependency array!
 
-export default async function Database() {
-  const users = await getUsers();
-  
+  if (loading) return <div>Loading...</div>;
+
   return (
     <>
       <h1>Users</h1>
